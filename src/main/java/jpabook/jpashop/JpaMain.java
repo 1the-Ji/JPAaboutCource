@@ -1,4 +1,4 @@
-package hellojpa;
+package jpabook.jpashop;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,22 +13,13 @@ public class JpaMain {
 
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        try{
-//            Member member = new Member();
-//            member.setId(2L);
-//            member.setName("HelloB");
-//            em.persist(member);
-            Member findMember = em.find(Member.class,1L);
-//            System.out.println("findMember.id = " + findMember.getId());
-//            System.out.println("findMember.name = " + findMember.getName());
-//            em.remove(findMember);
-            findMember.setName("HelloJPA_Update");
 
+        try{
             tx.commit();
         } catch (Exception e){
             tx.rollback();
         } finally {
-            em.clear();
+            em.close();
         }
         emf.close();
     }
